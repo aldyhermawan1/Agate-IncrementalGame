@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,11 +32,13 @@ public class GameManager : MonoBehaviour
     private List<TapText> _tapTextPool = new List<TapText>();
     private float _collectSecond;
 
-    public double TotalGold { get; private set; }
+    /*public double TotalGold { get; private set; }*/
 
     void Start()
     {
         AddAllResources();
+
+        GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString("0") }";
     }
 
     void Update()
@@ -59,11 +60,12 @@ public class GameManager : MonoBehaviour
     //Adding Right Menu Item
     private void AddAllResources() {
         bool showResources = true;
+        int index = 0;
         foreach(ResourceConfig config in ResourcesConfigs){
             GameObject obj = Instantiate(ResourcePrefab.gameObject, ResourcesParent, false);
             ResourceController resource = obj.GetComponent<ResourceController>();
             
-            resource.SetConfig(config);
+            resource.SetConfig(index, config);
             obj.gameObject.SetActive(showResources);
 
             if(showResources && !resource.IsUnlocked){
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
             }
 
             _activeResources.Add(resource);
+            index++;
         }
     }
 
@@ -90,8 +93,12 @@ public class GameManager : MonoBehaviour
 
     //Adding Gold
     public void AddGold(double value){
-        TotalGold += value;
-        GoldInfo.text = $"Gold: { TotalGold.ToString("0") }";
+        /*TotalGold += value;
+        GoldInfo.text = $"Gold: { TotalGold.ToString("0") }";*/
+
+        UserDataManager.Progress.Gold += value;
+        GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString("0") }";
+        UserDataManager.Save();
     }
 
     //Collect Gold by Tap
@@ -129,9 +136,11 @@ public class GameManager : MonoBehaviour
         foreach(ResourceController resource in _activeResources){
             bool isBuyable = false;
             if(resource.IsUnlocked){
-                isBuyable = TotalGold >= resource.GetUpgradeCost();
+                /*isBuyable = TotalGold >= resource.GetUpgradeCost();*/
+                isBuyable = UserDataManager.Progress.Gold >= resource.GetUpgradeCost();
             } else {
-                isBuyable = TotalGold >= resource.GetUnlockCost();
+                /*isBuyable = TotalGold >= resource.GetUnlockCost();*/
+                isBuyable = UserDataManager.Progress.Gold >= resource.GetUnlockCost();
             }
 
             resource.ResourceImage.sprite = ResourcesSprites[isBuyable ? 1 : 0];
