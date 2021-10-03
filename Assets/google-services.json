@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1046241018315",
+    "project_id": "agate-incrementalgame",
+    "storage_bucket": "agate-incrementalgame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046241018315:android:b72d33bd36aa875083f64e",
+        "android_client_info": {
+          "package_name": "com.hermawan.incrementalgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046241018315-7hobfamn3evu5gdp1tkvc0h555q2h11c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSzw5j9Uu3Q6KBBcNqdl6zSvXQdorp-MI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046241018315-7hobfamn3evu5gdp1tkvc0h555q2h11c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
